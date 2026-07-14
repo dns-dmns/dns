@@ -1,0 +1,378 @@
+@import "tailwindcss";
+
+@theme {
+  /* Premium Font Selections - San Francisco */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro", "SF Pro Text", "SF Pro Display", "San Francisco", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", "SF Pro Text", "San Francisco", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Custom Color Tokens */
+  --color-brand-primary: #2563EB; /* Premium Cobalt Blue */
+  --color-brand-dark: #1D1D1F;    /* Charcoal Black */
+  --color-brand-muted: #6E6E73;   /* Cool Gray */
+  --color-brand-bg: #F5F5F7;      /* Light Gray */
+  --color-brand-gold: #2563EB;    /* Cobalt Blue replacing Sotheby's Gold */
+  --color-brand-red: #FF453A;     /* Apple System Red / Danger */
+}
+
+/* Custom Utilities and Reset Overrides */
+@layer base {
+  body {
+    background-color: var(--color-brand-bg);
+    color: var(--color-brand-dark);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, .font-serif-luxury {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Elegant custom scrollbar for desktop views */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #D1D1D6;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #AEAEB2;
+}
+
+/* Glassmorphism settings for premium cards & sidebars */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-panel-dark {
+  background: rgba(29, 29, 31, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Marker design override for Leaflet to fit the Luxury theme */
+.custom-leaflet-marker {
+  width: 26px;
+  height: 26px;
+  border: 2.5px solid white;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
+}
+
+/* Available Pin - Emerald Green with soft pulsing halo */
+.custom-leaflet-marker.marker-available {
+  background-color: #10B981 !important;
+}
+
+.custom-leaflet-marker.marker-available::after {
+  content: '';
+  position: absolute;
+  inset: -2.5px;
+  border-radius: 50%;
+  background-color: #10B981;
+  opacity: 0.4;
+  z-index: -1;
+  animation: markerPulse 2s infinite ease-out;
+}
+
+/* Sold Pin - Red */
+.custom-leaflet-marker.marker-sold {
+  background-color: #EF4444 !important;
+}
+
+/* Selected Highlight State */
+.custom-leaflet-marker.marker-selected {
+  transform: scale(1.3) !important;
+  border-color: #ffffff !important;
+  outline: 2.5px solid #2563EB !important;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.55), 0 6px 14px rgba(0, 0, 0, 0.35) !important;
+  z-index: 9999 !important;
+}
+
+@keyframes markerPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Leaflet Custom Popup Styling */
+.leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(8px) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+  color: var(--color-brand-dark) !important;
+  padding: 4px !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+.leaflet-popup-content {
+  margin: 8px 12px !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+}
+
+/* Layout for interactive components */
+.transition-luxury {
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Fullscreen Gallery Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Touch targets & interactive feedback */
+.btn-premium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border-radius: 9999px;
+  padding: 10px 24px;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+}
+
+.btn-primary-luxury {
+  background-color: var(--color-brand-dark);
+  color: white;
+  border: 1px solid var(--color-brand-dark);
+}
+.btn-primary-luxury:hover {
+  background-color: var(--color-brand-gold);
+  border-color: var(--color-brand-gold);
+}
+
+.btn-secondary-luxury {
+  background-color: transparent;
+  color: var(--color-brand-dark);
+  border: 1px solid #D1D1D6;
+}
+.btn-secondary-luxury:hover {
+  background-color: rgba(29, 29, 31, 0.05);
+  border-color: var(--color-brand-dark);
+}
+
+/* Input Styles */
+.input-luxury {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #D1D1D6;
+  background-color: white;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.input-luxury:focus {
+  border-color: var(--color-brand-dark);
+  box-shadow: 0 0 0 3px rgba(29, 29, 31, 0.1);
+}
+
+/* Grid configurations */
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* ==========================================
+   DYNAMIC DARK MODE IMPLEMENTATION OVERRIDES
+   ========================================== */
+.dark,
+.dark body {
+  background-color: #0B0B0C !important;
+  color: #F5F5F7 !important;
+}
+
+.dark #app-root-layout,
+.dark #app-primary-viewport {
+  background-color: #0B0B0C !important;
+}
+
+/* Header & Navigation */
+.dark header, 
+.dark #app-sticky-header {
+  background-color: rgba(18, 18, 20, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #F5F5F7 !important;
+}
+
+.dark #nav-navigation-links {
+  background-color: #121215 !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark #nav-navigation-links button {
+  color: #AEAEB2 !important;
+}
+
+.dark #nav-navigation-links button:hover {
+  color: #FFFFFF !important;
+}
+
+.dark #nav-navigation-links button[class*="bg-white"] {
+  background-color: #1F1F24 !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark #nav-profile-readout .bg-neutral-50,
+.dark #theme-toggle-btn {
+  background-color: #16161A !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #F5F5F7 !important;
+}
+
+.dark #nav-profile-readout .bg-neutral-50:hover,
+.dark #theme-toggle-btn:hover {
+  background-color: #1F1F24 !important;
+}
+
+.dark #nav-logout-btn {
+  background-color: #16161A !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #AEAEB2 !important;
+}
+
+.dark #nav-logout-btn:hover {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+  color: #EF4444 !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+/* General Layout Elements & Cards */
+.dark .bg-white,
+.dark [class*="bg-white"] {
+  background-color: #121215 !important;
+  color: #F5F5F7 !important;
+}
+
+.dark .bg-neutral-50,
+.dark .bg-neutral-50\/70,
+.dark .bg-[#F5F5F7],
+.dark .bg-[#F5F5F7]\/30,
+.dark .bg-[#F5F5F7]\/50 {
+  background-color: #16161A !important;
+  color: #F5F5F7 !important;
+}
+
+.dark .border,
+.dark .border-neutral-200,
+.dark .border-neutral-200\/80,
+.dark .border-neutral-200\/65,
+.dark .border-neutral-200\/50,
+.dark .border-neutral-100 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Text Element Color Schemes */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark p, .dark span, .dark div {
+  /* Guard to prevent hardcoded colors from flashing bright */
+}
+
+.dark .text-\[\#1D1D1F\],
+.dark .text-neutral-900,
+.dark .text-neutral-800 {
+  color: #F5F5F7 !important;
+}
+
+.dark .text-\[\#6E6E73\],
+.dark .text-neutral-500,
+.dark .text-neutral-400 {
+  color: #AEAEB2 !important;
+}
+
+/* Buttons and Form Fields */
+.dark .input-luxury,
+.dark select,
+.dark input[type="text"],
+.dark input[type="number"] {
+  background-color: #17171C !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #FFFFFF !important;
+}
+
+.dark .input-luxury:focus,
+.dark select:focus {
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
+}
+
+.dark input[type="range"] {
+  background-color: #1A1A22 !important;
+}
+
+/* Dialogs & Overlays */
+.dark .bg-white\/90 {
+  background-color: rgba(18, 18, 22, 0.95) !important;
+}
+
+/* Live Map Component Overrides */
+.dark .bg-neutral-900\/90 {
+  background-color: rgba(10, 10, 12, 0.95) !important;
+}
+
+.dark #app-mobile-nav {
+  background-color: #121215 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark #app-mobile-nav button {
+  color: #AEAEB2 !important;
+}
+
+.dark #app-mobile-nav button[class*="text-\[\#1D1D1F\]"] {
+  color: #FFFFFF !important;
+}
+
+.dark .leaflet-bar a {
+  background-color: #121215 !important;
+  color: #F5F5F7 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .leaflet-bar a:hover {
+  background-color: #1C1C22 !important;
+}
+

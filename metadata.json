@@ -1,0 +1,6 @@
+{
+  "name": "All in 1 Asset",
+  "description": "Premium luxury land real estate mapping, portfolio explorer, and plot registry decision services.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
